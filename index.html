@@ -1,0 +1,96 @@
+<div class="head">
+    <style>
+        body {
+            background-color: rgb(5, 5, 20);
+        }
+
+        .canvas {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            left: 50%;
+            top: 50%;
+            translate: -50% -50%;
+
+            background-color: black;
+        }
+
+        .button {
+            position: absolute;
+            width: fit-content;
+            height: fit-content;
+            padding: 10px 20px;
+            left: 50%;
+            top: 20px;
+            translate: -50% 0%;
+
+            background: rgb(15, 15, 50);
+            border: 1px solid rgb(20, 20, 200);
+            outline: none;
+            border-radius: 10px;
+
+            font-size: 20px;
+            font-weight: bold;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            text-align: center;
+            color: white;
+
+            transition: all 200ms ease-in-out;
+        }
+
+        .button.store {
+            left: 60%;
+        }
+
+        .button.train {
+            left: 60%;
+        }
+
+        .button.clear {
+            left: 70%;
+        }
+
+        .button:hover {
+            background: rgb(30, 30, 100);
+            border: 1px solid rgb(20, 20, 200);
+            outline: none;
+        }
+        
+        .shape-select {
+            position: relative;
+            left: 20px;
+            margin: 5px;
+            padding: 0;
+
+            left: calc(50% - 200px);
+
+            display: inline-block;
+        }
+
+        .shape-select-label {
+            color: white;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: 15px;
+        }
+    </style>
+</div>
+<body>
+
+    <button class="button run" type="button">Run</button>
+    <button class="button train" type="button">Train</button>
+    <button class="button clear" type="button">Clear</button>
+
+    <div class="shape-select">
+        <input type="radio" class="shape-select-radio" name="shape-select" id="triangle" value="Triangle" checked>
+        <label class="shape-select-label" for="triangle">Triangle</label> <br>
+        <input type="radio" class="shape-select-radio" name="shape-select" id="square" value="Square">
+        <label class="shape-select-label" for="square">Square</label> <br>
+        <input type="radio" class="shape-select-radio" name="shape-select" id="circle" value="Circle">
+        <label class="shape-select-label" for="circle">Circle</labe> <br>
+    </div>
+
+    <script src="js/trainingdata.js"></script>
+    <script src="js/mouse.js"></script>
+    <script src="js/nerualnetwork2.js"></script>
+    <script src="js/main.js"></script>
+</body>
