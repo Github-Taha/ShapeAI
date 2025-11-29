@@ -263,3 +263,18 @@ class NeuralNetwork2v2 {
         return true;
     }
 }
+
+function relu(v) {
+    return Math.max(v, 0);
+}
+
+function sigmoid (x) {
+    return 1 / (1 + Math.pow(Math.E, -x))
+}
+
+function generateNestedFloat32Array(arLen, arLenN, random = false) {
+    const array = new Array(arLen);
+    for (let i = 0; i < arLen; i++)
+        array[i] = new Float32Array(arLenN).map((v) => random ? Math.random() * 2 - 1 : 0);
+    return array;
+}
