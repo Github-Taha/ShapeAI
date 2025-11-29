@@ -1,7 +1,7 @@
 <div class="head">
     <style>
         body {
-            background-color: rgb(5, 5, 20);
+            background-color: rgb(26, 26, 48);
         }
 
         .canvas {
@@ -72,6 +72,50 @@
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
             font-size: 15px;
         }
+
+        .percentage {
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            height: 100px;
+            width: 150px;
+            translate: 0% -50%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+
+            background-color: black;
+        }
+
+        .perc {
+            --width--: 20%;
+            
+            position: relative;
+            color: white;
+            font-family: monospace;
+            padding: 0px;
+            padding-left: 10px;
+            margin: 0;
+
+            z-index: 10;
+        }
+
+        .perc::before {
+            content: '';
+            position: absolute;
+            left: 0px;
+            /* top: 0px; */
+            translate: 0px -9px;
+            padding: 0;
+            margin: 0;
+            width: var(--width--);
+            height: calc(100px / 3);
+
+            background-color: rgb(8, 84, 138);
+
+            z-index: -1;
+        }
     </style>
 </div>
 <body>
@@ -87,6 +131,12 @@
         <label class="shape-select-label" for="square">Square</label> <br>
         <input type="radio" class="shape-select-radio" name="shape-select" id="circle" value="Circle">
         <label class="shape-select-label" for="circle">Circle</labe> <br>
+    </div>
+
+    <div class="percentage">
+        <p class="triangle perc">Triangle: 0.0%</p>
+        <p class="square perc"  >Square: &nbsp;&nbsp;0.0%</p>
+        <p class="circle perc"  >Circle: &nbsp;&nbsp;0.0%</p>
     </div>
 
     <script src="js/trainingdata.js"></script>
