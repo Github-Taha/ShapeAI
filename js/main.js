@@ -5,11 +5,15 @@ const ctx = canvas.getContext("2d");
 canvas.width = parseFloat(getComputedStyle(canvas).getPropertyValue("width"));
 canvas.height = parseFloat(getComputedStyle(canvas).getPropertyValue("height"));
 
+const triangleValEl = document.querySelector("p.perc.triangle");
+const squareValEl = document.querySelector("p.perc.square");
+const circleValEl = document.querySelector("p.perc.circle");
+
 const TRIANGLE = [1, 0, 0];
 const SQUARE = [0, 1, 0];
 const CIRCLE = [0, 0, 1];
 
-let nn = new NeuralNetwork2v2(100, [200, 100], 3);
+let nn = new NeuralNetwork2v2(100, [50], 3);
 
 const gridWidth = 10;
 const gridHeight = 10;
@@ -20,6 +24,7 @@ let screen = new Int8Array(gridWidth * gridHeight).fill(0);
 function animate () {
     requestAnimationFrame(animate);
 
+    // Update Screen
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     for (let y = 0; y < gridHeight; y++) {
@@ -33,6 +38,7 @@ function animate () {
         }
     }
 
+    // Calculate Mouse
     const mouseX = mouse.x - canvas.offsetLeft + canvas.width / 2;
     const mouseY = mouse.y - canvas.offsetTop + canvas.height / 2;
     if (mouseX < 0 || mouseY < 0 || mouseX > canvas.width || mouseY > canvas.height)
@@ -44,6 +50,15 @@ function animate () {
     const gridY = Math.floor(mouseY / blockHeight);
 
     screen[gridY * gridWidth + gridX] = mouse.shift ? 0 : 1;
+
+    // Recalculate AI
+    const nnVal = nn.feedForward(screen);
+    triangleValEl.innerHTML = "Triangle: " + precision(nnVal[0] * 100, 2) + "%";
+    triangleValEl.style.setProperty("--width--", nnVal[0] * 100 + "%");
+    squareValEl.innerHTML = "Square: &nbsp;&nbsp;" + precision(nnVal[1] * 100, 2) + "%";
+    squareValEl.style.setProperty("--width--", nnVal[1] * 100 + "%");
+    circleValEl.innerHTML = "Circle: &nbsp;&nbsp;" + precision(nnVal[2] * 100, 2) + "%";
+    circleValEl.style.setProperty("--width--", nnVal[2] * 100 + "%");
 }
 
 // document.querySelector(".store").onclick = () => {
@@ -75,6 +90,14 @@ function animate () {
 
 document.querySelector(".clear").onclick = () => {
     screen = new Int8Array(gridWidth * gridHeight).fill(0);
+
+    const nnVal = nn.feedForward(screen);
+    triangleValEl.innerHTML = "Triangle: " + precision(nnVal[0] * 100, 2) + "%";
+    triangleValEl.style.setProperty("--width--", nnVal[0] * 100 + "%");
+    squareValEl.innerHTML = "Square: &nbsp;&nbsp;" + precision(nnVal[1] * 100, 2) + "%";
+    squareValEl.style.setProperty("--width--", nnVal[1] * 100 + "%");
+    circleValEl.innerHTML = "Circle: &nbsp;&nbsp;" + precision(nnVal[2] * 100, 2) + "%";
+    circleValEl.style.setProperty("--width--", nnVal[2] * 100 + "%");
 }
 
 document.querySelector(".train").onclick = () => {
@@ -87,6 +110,14 @@ document.querySelector(".train").onclick = () => {
     }
 
     alert("Done Training");
+
+    const nnVal = nn.feedForward(screen);
+    triangleValEl.innerHTML = "Triangle: " + precision(nnVal[0] * 100, 2) + "%";
+    triangleValEl.style.setProperty("--width--", nnVal[0] * 100 + "%");
+    squareValEl.innerHTML = "Square: &nbsp;&nbsp;" + precision(nnVal[1] * 100, 2) + "%";
+    squareValEl.style.setProperty("--width--", nnVal[1] * 100 + "%");
+    circleValEl.innerHTML = "Circle: &nbsp;&nbsp;" + precision(nnVal[2] * 100, 2) + "%";
+    circleValEl.style.setProperty("--width--", nnVal[2] * 100 + "%");
 }
 
 document.querySelector(".run").onclick = () => {
@@ -143,5 +174,15 @@ function precision (v, p = 2) {
 //     str += "],\n";
 // }
 // console.log(str);
+
+{
+    const nnVal = nn.feedForward(screen);
+    triangleValEl.innerHTML = "Triangle: " + precision(nnVal[0] * 100, 2) + "%";
+    triangleValEl.style.setProperty("--width--", nnVal[0] * 100 + "%");
+    squareValEl.innerHTML = "Square: &nbsp;&nbsp;" + precision(nnVal[1] * 100, 2) + "%";
+    squareValEl.style.setProperty("--width--", nnVal[1] * 100 + "%");
+    circleValEl.innerHTML = "Circle: &nbsp;&nbsp;" + precision(nnVal[2] * 100, 2) + "%";
+    circleValEl.style.setProperty("--width--", nnVal[2] * 100 + "%");
+}
 
 requestAnimationFrame(animate);
