@@ -5,31 +5,6 @@ const ctx = canvas.getContext("2d");
 canvas.width = parseFloat(getComputedStyle(canvas).getPropertyValue("width"));
 canvas.height = parseFloat(getComputedStyle(canvas).getPropertyValue("height"));
 
-const words = {};
-const vectorLength = 16;
-
-trainingText.split(/\s/).forEach(
-    (word, index) => {
-        if (word == "")
-            return;
-
-        if (words[word] == undefined)
-            words[word] = Object.keys(words).length;
-    }
-);
-
-// console.log(words);
-
-let wordVectorMap = {};
-Object.keys(words).forEach(
-    (wordName, index) => {
-        const vectorArr = new Float32Array(16).map((v) => Math.random() * 2 - 1);
-        wordVectorMap[wordName] = vectorArr;
-    }
-);
-
-// console.log(wordVectorMap);
-
 const TRIANGLE = [1, 0, 0];
 const SQUARE = [0, 1, 0];
 const CIRCLE = [0, 0, 1];
